@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# =================== WILL NOTE: ===========================
+# This file in is dotfiles only as a reference, this file is not loaded anywhere in dotfiles
+# Many settings from this file have been added to set-defaults.sh which is run by bin/dot
+# ==========================================================
+
 # ~/.osx — https://mths.be/osx
 
 # Ask for the administrator password upfront
