@@ -50,7 +50,9 @@ plugins=(git git-flow github brew osx node npm sublime tmux tmuxinator)
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/willhs/.rvm/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+# texlive path
+export PATH="$PATH:/usr/local/texlive/2015basic/bin/x86_64-darwin/"
+export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 

@@ -1,10 +1,10 @@
+# 'screen' bugs workaround (for subl)
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+
 # Remap prefix to Control+a
 set -g prefix C-a
 unbind C-b
 bind C-a send-prefix
-
-# 'screen' bugs workaround (for subl)
-set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # Force a reload of the config file
 unbind r
@@ -16,6 +16,9 @@ set -g utf8 on
 bind - split-window -v
 unbind %
 bind | split-window -h
+
+# Set window name to the current directory name.
+#setw -g window-status-format "#{pane_current_path}".
 
 # Powerline status bar.
 set -g status on

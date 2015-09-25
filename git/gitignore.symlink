@@ -16,3 +16,8 @@ Thumbs.db
 # others from holman
 *~
 *.swp
+
+# eclipse files!
+.settings
+.project
+.classpath # not only eclipse but still usually not worth keeping

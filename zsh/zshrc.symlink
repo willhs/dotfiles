@@ -5,7 +5,7 @@ export DOTZSH=$HOME/.dotfiles
 export PROJECTS=~/projects
 
 # execute oh-my-zsh script
-source $DOTZSH/zsh/.omzrc
+source $DOTZSH/zsh/omzrc
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
