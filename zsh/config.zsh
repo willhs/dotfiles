@@ -9,7 +9,8 @@ export CLICOLOR=true
 
 fpath=($DOTZSH/functions $fpath)
 
-autoload -U $DOTZSH/functions/*(:t)
+#autoload -U $DOTZSH/functions/*(:t)
+autoload -U $DOTZSH/functions/*
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
