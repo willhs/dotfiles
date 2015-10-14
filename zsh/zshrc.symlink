@@ -16,7 +16,7 @@ then
 fi
 
 # all of our zsh files
-# including oh-my-zsh
+# will addition: including oh-my-zsh
 typeset -U config_files
 config_files=($DOTFILES/**/*.zsh)
 
