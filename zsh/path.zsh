@@ -1,2 +1,4 @@
 # add adb (android) to path
-export PATH=$PATH:/Users/willhs/Library/Android/sdk/platform-tools/
+export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
