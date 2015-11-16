@@ -1,4 +1,4 @@
-# *Will’s version of* holman does dotfiles
+# *Will’s slight changes to* holman does dotfiles
 
 ## dotfiles
 
