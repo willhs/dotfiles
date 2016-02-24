@@ -10,4 +10,4 @@ alias d="cd ~/.dotfiles"
 #   b) use blank passphrase
 # 2) ssh-copy-id id@server
 alias ssh-vuw="ssh hardwiwill@barretts.ecs.vuw.ac.nz"
-alias ssh-pi="ssh root@121.99.234.167"
+alias ssh-pi="ssh root@202.150.114.180"
