@@ -9,3 +9,4 @@ then
   alias la='gls -A --color'
 fi
 
+alias du="du -h"
