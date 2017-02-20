@@ -12,3 +12,5 @@ alias d="cd ~/.dotfiles"
 alias ssh-vuw="ssh hardwiwill@barretts.ecs.vuw.ac.nz"
 alias ssh-banana="ssh root@202.150.114.180"
 alias ssh-rasp="ssh pi@202.150.114.180"
+
+alias cls='clear' # Good 'ol Clear Screen command
