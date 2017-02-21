@@ -1,11 +1,11 @@
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES=$HOME/.dotfiles
 
+# $ZSH variable is deprecated, use $DOTFILES instead
+export ZSH="$DOTFILES"
+
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/projects
-
-# execute oh-my-zsh script
-source $DOTFILES/zsh/omzrc
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
@@ -16,7 +16,6 @@ then
 fi
 
 # all of our zsh files
-# will addition: including oh-my-zsh
 typeset -U config_files
 config_files=($DOTFILES/**/*.zsh)
 
@@ -32,9 +31,20 @@ do
   source $file
 done
 
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
+# Oh My Zsh could be installed somewhere out of dotfiles directory tree, e.g.
+# into  ~/.oh-my-zsh; the configuration file created by Oh My Zsh installer
+# should be moved as follows: {.zshrc => $DOTFILES/zsh/oh-my-zshrc}.
+if [[ -f $DOTFILES/zsh/oh-my-zshrc ]]; then
+  () {
+    local ZSH="$HOME/.oh-my-zsh"
+    source $DOTFILES/zsh/oh-my-zshrc
+    export OHMYZSH="$ZSH"
+  }
+else
+  # initialize autocomplete here, otherwise functions won't be loaded
+  autoload -U compinit
+  compinit
+fi
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
@@ -43,3 +53,6 @@ do
 done
 
 unset config_files
+
+# Notify existing users that they should migrate to another variable.
+export ZSH='$ZSH is deprecated, use either $DOTFILES or $OHMYZSH instead.'
