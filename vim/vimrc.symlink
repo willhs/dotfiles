@@ -134,3 +134,10 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+" include all subdirectories in path (useful with :find)
+set path+=**
+set wildmenu
+
+" run with python hotkey
+nnoremap <silent> <F5> :!clear;python %<CR>
