@@ -24,6 +24,7 @@
         status = auto
         branch = auto
         ui = true
+        pager = true
 [core]
         excludesfile = ~/.gitignore
         editor = vim
