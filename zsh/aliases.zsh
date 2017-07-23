@@ -2,6 +2,7 @@ alias reload!='. ~/.zshrc'
 alias p="cd $PROJECTS"
 alias h="cd ~"
 alias d="cd ~/.dotfiles"
+alias g="git"
 
 # ssh into vuw server
 # for auto-password entry
