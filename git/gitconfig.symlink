@@ -14,6 +14,9 @@
 	p = push
     b = branch
     st = stash
+    can = git commit -a --amend --no-edit
+    canp = git commit -a --amend --no-edit && git push -f
+    rma = git rebase master && git pull && git pull - && git rebase master
 
     can = commit -a --amend --no-edit
     canp = !git can && git p -f

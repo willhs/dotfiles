@@ -10,3 +10,5 @@ then
 fi
 
 alias du="du -h"
+alias python2="python"
+alias python="python3.5"

@@ -11,3 +11,5 @@ atom.symlink/recovery
 
 
 git/gitconfig.local.symlink
+
+/local

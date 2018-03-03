@@ -24,8 +24,8 @@ set -g status-utf8 on
 set -g status-justify "centre"
 set -g status-left-length 90
 set -g status-right-length 60
-set -g status-left "#(~/.dotfiles/misc/powerline.sh left)"
-set -g status-right "#(~/.dotfiles/misc/powerline.sh right)"
+set -g status-left "#($DOTFILES/misc/powerline.sh left)"
+set -g status-right "#($DOTFILES/misc/powerline.sh right)"
 
 # Better status bar colours.
 set -g status-fg white
