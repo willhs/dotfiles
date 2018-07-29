@@ -5,9 +5,11 @@
         protocol = https
 [alias]
 	s = status -sb
+    l = log
 	c = commit -v
 	a = add
 	d = diff
+    ds = diff --stat
 	m = merge
     co = checkout
 	pl = pull

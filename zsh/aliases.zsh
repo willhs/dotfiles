@@ -3,6 +3,7 @@ alias p="cd $PROJECTS"
 alias h="cd ~"
 alias d="cd ~/dotfiles"
 alias g="git"
+alias v="vim"
 
 # ssh into vuw server
 # for auto-password entry

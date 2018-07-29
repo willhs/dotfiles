@@ -1,0 +1,31 @@
+{
+    "layout": "stacked",
+    "percent": 0.30,
+    "type": "con",
+    "nodes": [
+        {
+            "name": "Google Chrome",
+            "percent": 1,
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "Google-chrome",
+                    "instance": "google-chrome",
+                    "window_role": "browser"
+               }
+            ]
+        },
+        {
+            "name": "vlc",
+            "percent": 1,
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "vlc",
+                    "instance": "vlc",
+                    "title": "VLC media player"
+               }
+            ]
+        }
+    ]
+}

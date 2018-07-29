@@ -1,0 +1,68 @@
+// vim:ts=4:sw=4:et
+
+{
+    "layout": "stacked",
+    "percent": 0.25,
+    "type": "con",
+    "nodes": [
+        {
+            "name": "terminal",
+            "type": "con",
+            "swallows": [
+                {
+                    "instance": "gnome-terminal-server",
+                    "class": "Gnome-terminal"
+                }
+            ]
+        }
+    ]
+}
+
+{
+    "layout": "splitv",
+    "percent": 0.30,
+    "type": "con",
+    "nodes": [
+		{
+			"name": "webstorm",
+			"type": "con",
+			"percent": 0.8,
+			"swallows": [
+				{
+					"instance": "sun-awt-X11-XFramePeer",
+					"class": "jetbrains-webstorm"
+				}
+			]
+		},
+		{
+			"name": "pycharm",
+			"percent": 0.2,
+			"swallows": [
+				{
+					"instance": "sun-awt-X11-XFramePeer",
+					"class": "jetbrains-pycharm"
+				}
+			]
+		}
+	]
+}
+
+{
+    "layout": "stacked",
+    "percent": 0.35,
+    "nodes": [
+        {
+            "name": "chromium",
+            "type": "con",
+            "swallows": [
+                {
+                    "instance": "chromium-browser",
+                    "class": "Chromium-browser"
+                }, {
+                    "instance": "vlc",
+                    "class": "vlc"
+                }
+            ]
+        }
+    ]
+}
