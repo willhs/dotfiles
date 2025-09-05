@@ -3,6 +3,10 @@
 # Ubuntu/WSL package installation
 # Installs apt packages and modern terminal tools
 
+# Fix line endings for all shell files (common WSL issue)
+echo "› Fixing line endings for shell files..."
+find "$DOTFILES" -name "*.sh" -o -name "*.zsh" | xargs sed -i 's/\r$//' 2>/dev/null || true
+
 # Update package list
 echo "› sudo apt update"
 sudo apt update
