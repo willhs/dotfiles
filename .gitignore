@@ -13,3 +13,4 @@ atom.symlink/recovery
 git/gitconfig.local.symlink
 
 /local
+**/.DS_Store
