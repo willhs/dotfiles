@@ -57,11 +57,3 @@ unset config_files
 # Notify existing users that they should migrate to another variable.
 export ZSH='$ZSH is deprecated, use either $DOTFILES or $OHMYZSH instead.'
 
-# for java home
-source /etc/environment
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/will/.sdkman"
-[[ -s "/home/will/.sdkman/bin/sdkman-init.sh" ]] && source "/home/will/.sdkman/bin/sdkman-init.sh"
-
-export ARDUIO_PATH=/usr/local/arduino

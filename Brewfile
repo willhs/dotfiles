@@ -28,8 +28,6 @@ brew 'yarn'
 brew 'youtube-dl'
 
 cask '1password'
-cask 'adium'
-cask 'atom'
 cask 'firefox'
 cask 'garmin-express'
 cask 'google-chrome'

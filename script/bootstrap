@@ -36,6 +36,8 @@ setup_gitconfig () {
     if [ "$(uname -s)" == "Darwin" ]
     then
       git_credential='osxkeychain'
+    elif grep -q microsoft /proc/version 2>/dev/null; then
+      git_credential='manager'
     fi
 
     user ' - What is your github author name?'
@@ -140,15 +142,32 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
-# If we're on a Mac, let's install and setup homebrew.
+# Install platform-specific dependencies
 if [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing dependencies"
+  info "installing macOS dependencies"
   if source bin/dot > /tmp/dotfiles-dot 2>&1
   then
     success "dependencies installed"
   else
     fail "error installing dependencies"
+  fi
+elif grep -q microsoft /proc/version 2>/dev/null; then
+  info "WSL detected - installing Ubuntu packages"
+  if source ubuntu/install.sh > /tmp/dotfiles-ubuntu 2>&1
+  then
+    success "Ubuntu packages installed"
+  else
+    fail "error installing Ubuntu packages"
+  fi
+elif [ "$(uname -s)" == "Linux" ]
+then
+  info "Linux detected - installing Ubuntu packages"
+  if source ubuntu/install.sh > /tmp/dotfiles-ubuntu 2>&1
+  then
+    success "Ubuntu packages installed"
+  else
+    fail "error installing Ubuntu packages"
   fi
 fi
 
