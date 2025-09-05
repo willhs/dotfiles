@@ -75,5 +75,11 @@ fi
 # grc (generic colouriser)
 sudo apt install -y grc
 
+# Set zsh as default shell if it's not already
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+  echo "› Setting zsh as default shell..."
+  chsh -s $(which zsh)
+fi
+
 echo "› Ubuntu package installation complete!"
 echo "› You may need to restart your shell or run 'source ~/.zshrc' to use new tools"
