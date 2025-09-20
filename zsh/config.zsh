@@ -47,7 +47,9 @@ fi
 
 # fzf key bindings and fuzzy completion
 if type fzf &>/dev/null; then
-  source <(fzf --zsh)
+  if fzf --help 2>&1 | grep -q -- "--zsh"; then
+    source <(fzf --zsh)
+  fi
 
   if type fd &>/dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'

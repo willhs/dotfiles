@@ -5,22 +5,24 @@
         protocol = https
 [alias]
 	s = status -sb
-    l = log
+  l = log
 	c = commit -v
 	a = add
 	d = diff
-    ds = diff --stat
+  ds = diff --stat
 	m = merge
-    co = checkout
+  co = checkout
 	pl = pull
 	p = push
-    b = branch
-    st = stash
-    can = commit -a --amend --no-edit
-    canp = !git can && git p -f
-    rebasement = !git fetch origin && git rebase
+  b = branch
+  st = stash
+  ca = commit -a
+  cam = commit -a --amend
+  can = commit -a --amend --no-edit
+  canp = !git can && git p -f
+  rebasement = !git fetch origin && git rebase
 
-    count   = !git shortlog -sn
+  count   = !git shortlog -sn
 	lol = log --pretty=format:%C(yellow)%h%Creset %cr %C(red)%d%Creset %s --graph --decorate --branches
 [color]
         diff = auto
