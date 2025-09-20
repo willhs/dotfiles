@@ -49,6 +49,16 @@ fi
 if type fzf &>/dev/null; then
   if fzf --help 2>&1 | grep -q -- "--zsh"; then
     source <(fzf --zsh)
+  else
+    for _fzf_example_dir in /usr/share/doc/fzf/examples /usr/share/doc/fzf; do
+      if [[ -f "$_fzf_example_dir/key-bindings.zsh" ]]; then
+        # Debian/Ubuntu packages ship helper scripts instead of the --zsh flag.
+        source "$_fzf_example_dir/key-bindings.zsh"
+        [[ -f "$_fzf_example_dir/completion.zsh" ]] && source "$_fzf_example_dir/completion.zsh"
+        break
+      fi
+    done
+    unset _fzf_example_dir
   fi
 
   if type fd &>/dev/null; then
