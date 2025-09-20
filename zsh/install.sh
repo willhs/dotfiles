@@ -22,7 +22,7 @@ if ! command -v starship >/dev/null 2>&1; then
     brew install starship
   else
     mkdir -p "$STARSHIP_BIN"
-    curl -fsSL https://starship.rs/install.sh | bash -s -- -y --bin-dir "$STARSHIP_BIN"
+    curl -fsSL https://starship.rs/install.sh | sh -s -- -y --bin-dir "$STARSHIP_BIN"
   fi
 else
   log "starship already installed"
