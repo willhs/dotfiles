@@ -14,3 +14,10 @@ git/gitconfig.local.symlink
 
 /local
 **/.DS_Store
+
+# ai
+.gent
+AGENTS.md
+CLAUDE.md
+.windsurfrules
+.claude

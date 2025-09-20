@@ -1,5 +1,0 @@
-# launch i3 desktop
-if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
-    (sleep 5 && i3-msg "workspace 2; append_layout ~/dotfiles/i3/jam.json; exec pycharm; exec webstorm; exec chromium-browser; exec gnome-terminal") &
-    (sleep 5 && i3-msg "workspace 1; append_layout ~/dotfiles/i3/small-monitor.json; exec google-chrome; exec vlc") &
-fi

@@ -33,8 +33,6 @@ sudo apt install -y \
   imagemagick \
   nodejs \
   npm \
-  postgresql-client \
-  ruby \
   neovim
 
 # Install modern terminal tools
@@ -49,31 +47,22 @@ if [ ! -f ~/.local/bin/bat ] && command -v batcat >/dev/null 2>&1; then
 fi
 
 # fzf (fuzzy finder)
-if ! command -v fzf &> /dev/null; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --all
-fi
+sudo apt install -y fzf
 
-# eza (better ls) - install from GitHub releases
+# eza (better ls) - prefer apt, fall back to GitHub release
 if ! command -v eza &> /dev/null; then
   echo "› Installing eza..."
-  EZA_VERSION=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-  wget -q "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz" -O /tmp/eza.tar.gz
-  sudo tar -xzf /tmp/eza.tar.gz -C /usr/local/bin/ eza
-  rm /tmp/eza.tar.gz
+  if ! sudo apt install -y eza; then
+    wget -q "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz" -O /tmp/eza.tar.gz
+    sudo tar -xzf /tmp/eza.tar.gz -C /usr/local/bin/ eza
+    rm /tmp/eza.tar.gz
+  fi
 fi
 
 # zoxide (better cd)
 if ! command -v zoxide &> /dev/null; then
   echo "› Installing zoxide..."
   curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-fi
-
-# rbenv for Ruby version management
-if ! command -v rbenv &> /dev/null; then
-  echo "› Installing rbenv..."
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
 
 # grc (generic colouriser)

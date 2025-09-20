@@ -47,8 +47,6 @@ export TERM=xterm-256color
 # ------------------------------------------------------------------------------
 if type zoxide &>/dev/null; then
   eval "$(zoxide init zsh --cmd cd)"
-else
-  echo ERROR: Could not load zoxide shell integration.
 fi
 
 
@@ -56,7 +54,9 @@ fi
 if type fzf &>/dev/null; then
   source <(fzf --zsh)
 
-  export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+  if type fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+  fi
 
   export FZF_CTRL_R_OPTS="
     --color header:italic
@@ -79,6 +79,4 @@ if type fzf &>/dev/null; then
     --bind 'ctrl-/:change-preview-window(down|hidden|)'
     --header 'CTRL-/: Toggle preview window position'
     "
-else
-  echo ERROR: could not find fzf shell integration.
 fi

@@ -132,7 +132,7 @@ install_dotfiles () {
 
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 3 -name '*.symlink' -not -path '*.git*')
   do
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
@@ -146,11 +146,11 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing macOS dependencies"
-  if source bin/dot > /tmp/dotfiles-dot 2>&1
+  if macos/install.sh > /tmp/dotfiles-macos 2>&1
   then
-    success "dependencies installed"
+    success "macOS setup complete"
   else
-    fail "error installing dependencies"
+    fail "error installing macOS dependencies"
   fi
 elif grep -q microsoft /proc/version 2>/dev/null; then
   info "WSL detected - installing Ubuntu packages"

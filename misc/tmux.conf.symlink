@@ -17,15 +17,14 @@ bind | split-window -h
 # Set window name to the current directory name.
 #setw -g window-status-format "#{pane_current_path}".
 
-# Powerline status bar.
+# Status bar
 set -g status on
 set -g status-interval 1
-set -g status-utf8 on
 set -g status-justify "centre"
-set -g status-left-length 90
-set -g status-right-length 60
-set -g status-left "#($DOTFILES/misc/powerline.sh left)"
-set -g status-right "#($DOTFILES/misc/powerline.sh right)"
+set -g status-left-length 40
+set -g status-right-length 80
+set -g status-left '#S '
+set -g status-right '#{pane_current_command} #[fg=colour244]| #[fg=colour250]%Y-%m-%d %H:%M'
 
 # Better status bar colours.
 set -g status-fg white

@@ -24,8 +24,6 @@ if type eza &>/dev/null; then
   alias lta2="eza -lTag --level=2 --icons=always"
   alias lta3="eza -lTag --level=3 --icons=always"
   alias lta4="eza -lTag --level=4 --icons=always"
-else
-  echo ERROR: eza could not be found. Skip setting up eza aliases.
 fi
 
 

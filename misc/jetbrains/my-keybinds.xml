@@ -1,4 +1,4 @@
-<keymap version="1" name="Da  Best" parent="Default for XWin">
+<keymap version="1" name="Da Best" parent="Default for XWin">
   <action id="Back">
     <keyboard-shortcut first-keystroke="ctrl alt left" />
     <mouse-shortcut keystroke="button4" />

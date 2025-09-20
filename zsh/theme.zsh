@@ -1,4 +1,7 @@
 # reloads the zsh theme (because it gets overwritten somewhere)
-local OHMYZSH=~/.oh-my-zsh
-local ZSH_THEME=robbyrussell
-source "$OHMYZSH/themes/$ZSH_THEME.zsh-theme"
+: "${OHMYZSH:=$HOME/.oh-my-zsh}"
+: "${ZSH_THEME:=robbyrussell}"
+
+if [ -f "$OHMYZSH/themes/$ZSH_THEME.zsh-theme" ]; then
+  source "$OHMYZSH/themes/$ZSH_THEME.zsh-theme"
+fi
