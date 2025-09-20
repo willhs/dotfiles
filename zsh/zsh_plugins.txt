@@ -1,0 +1,6 @@
+# Antidote plugin bundle list. Lines beginning with '#' are ignored.
+# Documentation: https://antidote.sh
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
