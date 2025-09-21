@@ -61,21 +61,19 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp" },
     config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "ts_ls", "pyright", "lua_ls", "solargraph" },
-        automatic_installation = true,
-      })
-
-      local lsp = require("lspconfig")
-
       local caps = vim.lsp.protocol.make_client_capabilities()
       local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
       if ok then caps = cmp_lsp.default_capabilities(caps) end
 
-      lsp.ts_ls.setup({ capabilities = caps })
-      lsp.pyright.setup({ capabilities = caps })
-      lsp.lua_ls.setup({ capabilities = caps })
-      lsp.solargraph.setup({ capabilities = caps })
+      require("mason-lspconfig").setup({
+        ensure_installed = { "ts_ls", "pyright", "lua_ls" },
+        automatic_installation = false,
+        handlers = {
+          function(server_name)
+            require("lspconfig")[server_name].setup({ capabilities = caps })
+          end,
+        },
+      })
     end,
   },
 
