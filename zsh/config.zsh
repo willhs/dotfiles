@@ -47,7 +47,9 @@ fi
 
 # fzf key bindings and fuzzy completion
 if type fzf &>/dev/null; then
-  if fzf --help 2>&1 | grep -q -- "--zsh"; then
+  fzf_help="$(fzf --help 2>&1)"
+
+  if [[ $fzf_help == *"--zsh"* ]]; then
     source <(fzf --zsh)
   else
     for _fzf_example_dir in /usr/share/doc/fzf/examples /usr/share/doc/fzf; do
@@ -61,6 +63,42 @@ if type fzf &>/dev/null; then
     unset _fzf_example_dir
   fi
 
+  if [[ $fzf_help == *"--walker"* ]]; then
+    export FZF_CTRL_T_OPTS="
+      --walker-skip .git,node_modules,target
+      --preview 'bat -n --color=always {}'
+      --bind 'ctrl-/:change-preview-window(down|hidden|)'
+      --no-height
+      "
+
+    export FZF_ALT_C_OPTS="
+      --walker-skip .git,node_modules,target
+      --preview 'tree -C {}'
+      --height=80%
+      --bind 'ctrl-/:change-preview-window(down|hidden|)'
+      --header 'CTRL-/: Toggle preview window position'
+      "
+  else
+    if [[ -z ${FZF_CTRL_T_COMMAND-} ]] && type fd &>/dev/null; then
+      export FZF_CTRL_T_COMMAND='fd --type f --hidden --exclude .git'
+    fi
+
+    export FZF_CTRL_T_OPTS="
+      --preview 'bat -n --color=always {}'
+      --bind 'ctrl-/:toggle-preview'
+      --height=80%
+      "
+
+    export FZF_ALT_C_OPTS="
+      --preview 'tree -C {}'
+      --height=80%
+      --bind 'ctrl-/:toggle-preview'
+      --header 'CTRL-/: Toggle preview window position'
+      "
+  fi
+
+  unset fzf_help
+
   if type fd &>/dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
   fi
@@ -70,20 +108,5 @@ if type fzf &>/dev/null; then
     --height=80%
     --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
     --header 'CTRL-Y: Copy command into clipboard, CTRL-/: Toggle line wrapping, CTRL-R: Toggle sorting by relevance'
-    "
-
-  export FZF_CTRL_T_OPTS="
-    --walker-skip .git,node_modules,target
-    --preview 'bat -n --color=always {}'
-    --bind 'ctrl-/:change-preview-window(down|hidden|)'
-    --no-height
-    "
-
-  export FZF_ALT_C_OPTS="
-    --walker-skip .git,node_modules,target
-    --preview 'tree -C {}'
-    --height=80%
-    --bind 'ctrl-/:change-preview-window(down|hidden|)'
-    --header 'CTRL-/: Toggle preview window position'
     "
 fi
