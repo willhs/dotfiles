@@ -30,3 +30,37 @@ if version.ge == nil then
     return cur_patch >= tgt_patch
   end
 end
+
+local lsp = vim.lsp
+if lsp and lsp.enable == nil then
+  local function as_list(value)
+    if type(value) == "table" then
+      return value
+    end
+    return { value }
+  end
+
+  function lsp.enable(name, enable)
+    if enable == false then
+      return
+    end
+
+    local ok, lspconfig = pcall(require, "lspconfig")
+    if not ok then
+      return
+    end
+
+    for _, server in ipairs(as_list(name)) do
+      local cfg = lspconfig[server]
+      if cfg and cfg.manager and cfg.manager.try_add_wrapper then
+        cfg.manager:try_add_wrapper()
+      end
+    end
+  end
+
+  if lsp.is_enabled == nil then
+    function lsp.is_enabled()
+      return false
+    end
+  end
+end
