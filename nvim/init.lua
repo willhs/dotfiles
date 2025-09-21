@@ -1,3 +1,4 @@
+require("compat")
 require("options")
 require("keymaps")
 
