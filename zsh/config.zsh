@@ -27,12 +27,22 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+bindkey -v
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
+
+if [[ -n ${terminfo[kcuu1]-} ]]; then
+  bindkey "${terminfo[kcuu1]}" history-substring-search-up
+fi
+
+if [[ -n ${terminfo[kcud1]-} ]]; then
+  bindkey "${terminfo[kcud1]}" history-substring-search-down
+fi
 
 # set 256 colours
 export TERM=xterm-256color

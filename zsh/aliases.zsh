@@ -8,6 +8,7 @@ alias g="git"
 alias v=nvim
 alias vim=nvim
 alias n=nvim
+alias c=claude
 
 # eza (better `ls`)
 # ------------------------------------------------------------------------------

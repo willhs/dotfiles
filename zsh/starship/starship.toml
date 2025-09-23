@@ -1,7 +1,7 @@
 add_newline = false
 scan_timeout = 30
 
-format = "\n$directory$git_branch$git_status\n$character "
+format = "$directory$git_branch$git_status $character"
 
 [directory]
 style = "bold cyan"
@@ -14,11 +14,14 @@ error_symbol = "[›](bold red)"
 
 [git_branch]
 style = "bold green"
-format = " on [$symbol$branch]($style)"
+format = " [$branch]($style)"
 
 [git_status]
 style = "bold red"
 format = " $all_status$ahead_behind"
 
 [battery]
+disabled = true
+
+[gcloud]
 disabled = true

@@ -5,24 +5,28 @@
         protocol = https
 [alias]
 	s = status -sb
-  l = log
+	l = log
 	c = commit -v
 	a = add
 	d = diff
-  ds = diff --stat
+	ds = diff --stat
 	m = merge
-  co = checkout
+	co = checkout
 	pl = pull
 	p = push
-  b = branch
-  st = stash
-  ca = commit -a
-  cam = commit -a --amend
-  can = commit -a --amend --no-edit
-  canp = !git can && git p -f
-  rebasement = !git fetch origin && git rebase
-
-  count   = !git shortlog -sn
+	pn = push -u origin HEAD
+	b = branch
+	st = stash
+	ca = commit -a
+	cam = commit -a --amend
+	can = commit -a --amend --no-edit
+	canp = !git can && git p -f
+	rma = git rebase master && git pull && git pull - && git rebase master
+	rebasement = !git fetch origin && git rebase
+	promote = !$DOTFILES/bin/git-promote
+	wtf = !$DOTFILES/bin/git-wtf
+	rank-contributors = !$DOTFILES/bin/git-rank-contributors
+	count = !git shortlog -sn
 	lol = log --pretty=format:%C(yellow)%h%Creset %cr %C(red)%d%Creset %s --graph --decorate --branches
 [color]
         diff = auto
@@ -33,6 +37,9 @@
 [core]
         excludesfile = ~/.gitignore
         editor = nvim
+        preloadindex = true
+        fscache = true
+        bigFileThreshold = 50m
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -50,6 +57,13 @@
 [pull]
         rebase = false
 [user]
-	email = whardwicksmith@8i.com
+	name = Will
+	email = whardwicksmith@gmail.com
 [merge]
 	tool = vimdiff
+[gc]
+	auto = 256
+[fetch]
+	fsckobjects = false
+[receive]
+	fsckobjects = false
