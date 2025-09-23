@@ -1,8 +1,7 @@
-# Local/private config goes in the include
 [include]
-        path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 [hub]
-        protocol = https
+  protocol = https
 [alias]
 	s = status -sb
 	l = log
@@ -29,33 +28,33 @@
 	count = !git shortlog -sn
 	lol = log --pretty=format:%C(yellow)%h%Creset %cr %C(red)%d%Creset %s --graph --decorate --branches
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
-        pager = true
+  diff = auto
+  status = auto
+  branch = auto
+  ui = true
+  pager = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = nvim
-        preloadindex = true
-        fscache = true
-        bigFileThreshold = 50m
+  excludesfile = ~/.gitignore
+  editor = nvim
+  preloadindex = true
+  fscache = true
+  bigFileThreshold = 50m
 [apply]
-        whitespace = nowarn
+  whitespace = nowarn
 [mergetool]
-        keepBackup = false
+  keepBackup = false
 [difftool]
-        prompt = false
+  prompt = false
 [help]
-        autocorrect = 1
+  autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
+  # See `git help config` (search for push.default)
+  # for more information on different options of the below setting.
+  #
+  # Setting to git 2.0 default to suppress warning message
+  default = simple
 [pull]
-        rebase = false
+  rebase = false
 [user]
 	name = Will
 	email = whardwicksmith@gmail.com
