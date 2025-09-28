@@ -17,21 +17,20 @@ error_symbol = "[›](bold red)"
 
 [git_branch]
 style = "bold magenta"
-format = " [$branch]($style)"
+format = " [$symbol$branch]($style)"
 
 [git_status]
-style = "bold yellow"
 format = " [$all_status$ahead_behind]($style)"
-conflicted = "x "
-ahead = "a${count} "
-behind = "b${count} "
-diverged = "div${ahead_count}/${behind_count} "
-stashed = "s "
-staged = "+${count} "
-modified = "!${count} "
-renamed = ">${count} "
-deleted = "-${count} "
-untracked = "?${count} "
+conflicted = "[✖${count}](bold red) "
+ahead = "[↑${count}](bold green) "
+behind = "[↓${count}](bold red) "
+diverged = "[↕${ahead_count}/${behind_count}](bold yellow) "
+stashed = "[📦${count}](bold cyan) "
+staged = "[+${count}](bold green) "
+modified = "[!${count}](bold yellow) "
+renamed = "[»${count}](bold blue) "
+deleted = "[-${count}](bold red) "
+untracked = "[?${count}](bold red) "
 
 [battery]
 disabled = true
@@ -51,3 +50,4 @@ style = "dimmed white"
 
 [os.symbols]
 Macos = ""
+Linux = "🐧"

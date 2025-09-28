@@ -51,7 +51,11 @@ export TERM=xterm-256color
 # zoxide (better `cd`)
 # ------------------------------------------------------------------------------
 if type zoxide &>/dev/null; then
-  eval "$(zoxide init zsh --cmd cd)"
+  if [[ -o interactive ]]; then
+    eval "$(zoxide init zsh --cmd cd)"
+  else
+    eval "$(zoxide init zsh)"
+  fi
 fi
 
 
