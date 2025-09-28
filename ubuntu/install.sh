@@ -45,14 +45,13 @@ fi
 # fzf (fuzzy finder)
 sudo apt install -y fzf
 
-# eza (better ls) - prefer apt, fall back to GitHub release
+# eza (better ls)
 if ! command -v eza &> /dev/null; then
   echo "› Installing eza..."
-  if ! sudo apt install -y eza; then
-    wget -q "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz" -O /tmp/eza.tar.gz
-    sudo tar -xzf /tmp/eza.tar.gz -C /usr/local/bin/ eza
-    rm /tmp/eza.tar.gz
-  fi
+  curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg
+  echo "deb https://debian.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
+  sudo apt update
+  sudo apt install -y eza
 fi
 
 # zoxide (better cd)
@@ -67,7 +66,7 @@ sudo apt install -y grc
 # Set zsh as default shell if it's not already
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
   echo "› Setting zsh as default shell..."
-  chsh -s $(which zsh)
+  sudo chsh -s $(which zsh) $USER
 fi
 
 echo "› Ubuntu package installation complete!"
