@@ -1,3 +1,5 @@
+export ZSH_HIGHLIGHT_MAX_LEN=256
+
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 

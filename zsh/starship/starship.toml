@@ -18,6 +18,7 @@ error_symbol = "[›](bold red)"
 [git_branch]
 style = "bold magenta"
 format = " [$symbol$branch]($style)"
+truncation_length = 10
 
 [git_status]
 format = " [$all_status$ahead_behind]($style)"

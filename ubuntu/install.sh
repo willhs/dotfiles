@@ -45,6 +45,9 @@ fi
 # fzf (fuzzy finder)
 sudo apt install -y fzf
 
+# ripgrep (better grep)
+sudo apt install -y ripgrep
+
 # eza (better ls)
 if ! command -v eza &> /dev/null; then
   echo "› Installing eza..."
