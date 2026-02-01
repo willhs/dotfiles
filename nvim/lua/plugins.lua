@@ -68,7 +68,6 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = { "ts_ls", "pyright", "lua_ls"},
         automatic_installation = false,
-        automatic_enable = false, -- Neovim 0.9 lacks vim.lsp.enable
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({ capabilities = caps })
