@@ -24,7 +24,7 @@ fi
 
 if [ -x "$GENT_DIR/bin/gent" ]; then
   echo "Installing gent dependencies..."
-  (cd "$GENT_DIR" && bundle install --quiet 2>/dev/null || gem install toml-rb)
+  (cd "$GENT_DIR" && bundle install --quiet 2>/dev/null || gem install --user-install toml-rb)
   echo "Running gent init --global..."
   "$GENT_DIR/bin/gent" init --global
 fi
