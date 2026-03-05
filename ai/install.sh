@@ -11,6 +11,22 @@ else
   echo "Claude Code already installed"
 fi
 
+# --- Gent (AI agent config manager) ---
+GENT_DIR="$HOME/projects/gent"
+if [ ! -d "$GENT_DIR" ]; then
+  echo "Cloning gent..."
+  mkdir -p "$HOME/projects"
+  git clone https://github.com/willhs/gent "$GENT_DIR"
+else
+  echo "Updating gent..."
+  git -C "$GENT_DIR" pull --ff-only --quiet || true
+fi
+
+if [ -x "$GENT_DIR/bin/gent" ]; then
+  echo "Running gent init --global..."
+  "$GENT_DIR/bin/gent" init --global
+fi
+
 # --- Claude Agents ---
 echo "Linking Claude agents..."
 CLAUDE_AGENTS="$HOME/.claude/agents"
