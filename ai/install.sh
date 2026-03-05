@@ -1,7 +1,15 @@
 #!/bin/bash
-# Symlink Claude Code agents and skills from dotfiles
+# Install Claude Code and symlink agents/skills from dotfiles
 
 DOTFILES_AI="$(cd "$(dirname "$0")" && pwd)"
+
+# --- Install Claude Code ---
+if ! command -v claude >/dev/null 2>&1; then
+  echo "Installing Claude Code..."
+  curl -fsSL https://claude.ai/install.sh | bash
+else
+  echo "Claude Code already installed"
+fi
 
 # --- Claude Agents ---
 echo "Linking Claude agents..."
