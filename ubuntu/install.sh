@@ -33,7 +33,8 @@ sudo apt install -y \
   fd-find \
   tmux \
   tree \
-  ruby
+  ruby \
+  ruby-dev
 
 # On Ubuntu, fd is installed as fdfind — create a symlink so scripts can use `fd`
 if [ ! -f ~/.local/bin/fd ] && command -v fdfind >/dev/null 2>&1; then
