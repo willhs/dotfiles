@@ -142,33 +142,13 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
-# Install platform-specific dependencies
-if [ "$(uname -s)" == "Darwin" ]
+# Run topic installers (profile-aware)
+info "running installers"
+if $DOTFILES_ROOT/script/install
 then
-  info "installing macOS dependencies"
-  if macos/install.sh > /tmp/dotfiles-macos 2>&1
-  then
-    success "macOS setup complete"
-  else
-    fail "error installing macOS dependencies"
-  fi
-elif grep -q microsoft /proc/version 2>/dev/null; then
-  info "WSL detected - installing Ubuntu packages"
-  if source ubuntu/install.sh > /tmp/dotfiles-ubuntu 2>&1
-  then
-    success "Ubuntu packages installed"
-  else
-    fail "error installing Ubuntu packages"
-  fi
-elif [ "$(uname -s)" == "Linux" ]
-then
-  info "Linux detected - installing Ubuntu packages"
-  if source ubuntu/install.sh > /tmp/dotfiles-ubuntu 2>&1
-  then
-    success "Ubuntu packages installed"
-  else
-    fail "error installing Ubuntu packages"
-  fi
+  success "installers complete"
+else
+  fail "error running installers"
 fi
 
 echo ''

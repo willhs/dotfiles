@@ -29,7 +29,16 @@ sudo apt install -y \
   imagemagick \
   nodejs \
   npm \
-  neovim
+  neovim \
+  fd-find \
+  tmux \
+  tree
+
+# On Ubuntu, fd is installed as fdfind — create a symlink so scripts can use `fd`
+if [ ! -f ~/.local/bin/fd ] && command -v fdfind >/dev/null 2>&1; then
+  mkdir -p ~/.local/bin
+  ln -s "$(command -v fdfind)" ~/.local/bin/fd
+fi
 
 # Install modern terminal tools
 echo "› Installing modern terminal tools..."

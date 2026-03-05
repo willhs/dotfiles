@@ -55,9 +55,6 @@
   default = simple
 [pull]
   rebase = false
-[user]
-	name = Will
-	email = whardwicksmith@gmail.com
 [merge]
 	tool = vimdiff
 [gc]

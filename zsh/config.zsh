@@ -120,7 +120,7 @@ if type fzf &>/dev/null; then
   export FZF_CTRL_R_OPTS="
     --color header:italic
     --height=80%
-    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | ${CLIP_COPY:-pbcopy})+abort'
     --header 'CTRL-Y: Copy command into clipboard, CTRL-/: Toggle line wrapping, CTRL-R: Toggle sorting by relevance'
     "
 fi
