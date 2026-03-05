@@ -11,9 +11,19 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-
 -- appearance
-config.font = wezterm.font 'MonaspiceNe Nerd Font'
+config.font = wezterm.font('MonaspiceAr Nerd Font')
+config.font_rules = {
+  {
+    intensity = 'Bold',
+    font = wezterm.font('MonaspiceAr Nerd Font', { weight = 900 }),
+  },
+  {
+    intensity = 'Bold',
+    italic = true,
+    font = wezterm.font('MonaspiceAr Nerd Font', { weight = 900, italic = true }),
+  },
+}
 config.font_size = 13.0
 -- config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
@@ -24,13 +34,13 @@ config.macos_window_background_blur = 10
 
 config.keys = {
   {
-    key = '-',
-    mods = 'CMD|SHIFT',
+    key = '_',
+    mods = 'CTRL|SHIFT',
     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" })
   },
   {
     key = '?',
-    mods = 'CMD',
+    mods = 'CTRL|SHIFT',
     action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" })
   },
   {
@@ -43,6 +53,8 @@ config.keys = {
     key = 'F20',
     action = wezterm.action.Nop
   },
+  -- Show pane titles
+  { key = 's', mods = 'CMD', action = wezterm.action.EmitEvent('show-pane-titles') },
   -- Pane navigation
   { key = 'h', mods = 'CMD|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
   { key = 'j', mods = 'CMD|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
