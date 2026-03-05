@@ -1,4 +1,4 @@
-export PATH="$PATH:./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin"
+export PATH="$HOME/.local/bin:$PATH:./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin"
 
 # Ruby user-installed gems
 if command -v ruby >/dev/null 2>&1; then
