@@ -32,7 +32,8 @@ sudo apt install -y \
   neovim \
   fd-find \
   tmux \
-  tree
+  tree \
+  ruby
 
 # On Ubuntu, fd is installed as fdfind — create a symlink so scripts can use `fd`
 if [ ! -f ~/.local/bin/fd ] && command -v fdfind >/dev/null 2>&1; then
