@@ -7,15 +7,25 @@ bind C-a send-prefix
 unbind r
 bind r source-file ~/.tmux.conf
 
-set -g default-terminal "screen-256color"
-set -g utf8 on
+# Modern terminal
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ",xterm-256color:RGB"
 
-bind - split-window -v
+# Splits
+bind - split-window -v -c "#{pane_current_path}"
 unbind %
-bind | split-window -h
+bind | split-window -h -c "#{pane_current_path}"
 
-# Set window name to the current directory name.
-#setw -g window-status-format "#{pane_current_path}".
+# New windows inherit path too
+bind J new-window -c "#{pane_current_path}"
+bind K kill-window
+bind H prev
+bind L next
+
+# Auto pane titles from running command / directory
+set -g pane-border-status top
+set -g pane-border-format " #{pane_index}: #{?pane_title,#{pane_title},#{pane_current_command}} #{pane_current_path} "
+setw -g automatic-rename on
 
 # Status bar
 set -g status on
@@ -24,19 +34,15 @@ set -g status-justify "centre"
 set -g status-left-length 40
 set -g status-right-length 80
 set -g status-left '#S '
-set -g status-right '#{pane_current_command} #[fg=colour244]| #[fg=colour250]%Y-%m-%d %H:%M'
+set -g status-right '#{pane_current_command} | %Y-%m-%d %H:%M'
 
-# Better status bar colours.
-set -g status-fg white
-set -g status-bg colour235
-set -g window-status-activity-attr bold
-set -g pane-border-fg colour245
-set -g pane-active-border-fg colour39
-set -g message-fg colour16
-set -g message-bg colour221
-set -g message-attr bold
+# Colours (tmux 3.2+ style syntax)
+set -g status-style "fg=white,bg=colour235"
+set -g pane-border-style "fg=colour245"
+set -g pane-active-border-style "fg=colour39"
+set -g message-style "fg=colour16,bg=colour221,bold"
 
-# Vim style panes.
+# Vim style panes
 unbind l
 bind h select-pane -L
 bind j select-pane -D
@@ -48,14 +54,12 @@ bind C-j select-pane -D
 bind C-k select-pane -U
 bind C-l select-pane -R
 
-# Quick resizing.
+# Quick resizing
 bind -n C-H resize-pane -L 1
 bind -n C-J resize-pane -D 1
 bind -n C-K resize-pane -U 1
 bind -n C-L resize-pane -R 1
 
-# Windows as tabs.
-bind J new-window
-bind K kill-window
-bind H prev
-bind L next
+# Mouse support
+set -g mouse on
+set -g focus-events on

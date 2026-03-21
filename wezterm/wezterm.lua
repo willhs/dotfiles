@@ -83,4 +83,18 @@ config.send_composed_key_when_right_alt_is_pressed = false
 -- Dim inactive panes
 config.inactive_pane_hsb = { brightness = 0.7 }
 
+-- Pass the window-focus click through to tmux so a single click
+-- both focuses the window and selects the tmux pane.
+config.swallow_mouse_click_on_window_focus = false
+
+-- Capture the user's full shell PATH so panes spawned from minimal-env contexts
+-- (e.g. launchd services calling `wezterm cli split-pane`) get the right PATH.
+-- Without this, tools like pyenv/nvm aren't available and Claude Code's MCP
+-- servers fail to start because they find the wrong python3.
+local success, full_path = wezterm.run_child_process({"zsh", "-ic", "echo $PATH"})
+if success and full_path then
+  full_path = full_path:gsub("%s+$", "")  -- trim trailing whitespace
+  config.set_environment_variables = { PATH = full_path }
+end
+
 return config
