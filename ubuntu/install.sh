@@ -66,6 +66,27 @@ fi
 # grc (generic colouriser)
 sudo apt install -y grc
 
+# starship (prompt)
+if ! command -v starship &> /dev/null; then
+  echo "› Installing starship..."
+  curl -sS https://starship.rs/install.sh | sh -s -- -y
+fi
+
+# Nerd Font (for starship icons)
+if ! fc-list | grep -qi "nerd"; then
+  echo "› Installing FiraCode Nerd Font..."
+  mkdir -p ~/.local/share/fonts
+  cd ~/.local/share/fonts
+  curl -sLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
+  unzip -o FiraCode.zip
+  rm FiraCode.zip
+  fc-cache -fv
+  cd - > /dev/null
+  echo "› Nerd Font installed! Configure your terminal to use 'FiraCode Nerd Font'"
+else
+  echo "› Nerd Font already installed"
+fi
+
 # Set zsh as default shell if it's not already
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
   echo "› Setting zsh as default shell..."
@@ -74,3 +95,4 @@ fi
 
 echo "› Ubuntu package installation complete!"
 echo "› You may need to restart your shell or run 'source ~/.zshrc' to use new tools"
+echo "› Don't forget to set your terminal font to 'FiraCode Nerd Font' for icons to display"

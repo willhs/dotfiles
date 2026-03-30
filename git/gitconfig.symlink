@@ -39,6 +39,7 @@
   preloadindex = true
   fscache = true
   bigFileThreshold = 50m
+	autocrlf = input
 [apply]
   whitespace = nowarn
 [mergetool]
@@ -54,7 +55,7 @@
   # Setting to git 2.0 default to suppress warning message
   default = simple
 [pull]
-  rebase = false
+	rebase = false
 [user]
 	name = Will
 	email = whardwicksmith@gmail.com

@@ -19,5 +19,6 @@ git/gitconfig.local.symlink
 .gent
 AGENTS.md
 CLAUDE.md
+GEMINI.md
 .windsurfrules
 .claude
