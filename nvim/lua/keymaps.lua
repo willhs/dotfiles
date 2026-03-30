@@ -4,6 +4,10 @@ vim.keymap.set("n", "<C-l>", "<C-i>", { desc = "Jump forward (JetBrains style)" 
 
 -- find/grep string in project
 vim.keymap.set("n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "Grep project" })
+vim.keymap.set("v", "<leader>g", function()
+  local text = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+  require("telescope.builtin").live_grep({ default_text = table.concat(text, "\n") })
+end, { desc = "Grep selection" })
 
 -- jump to this config file
 vim.keymap.set("n", "<leader>v", ":e $MYVIMRC<CR>", { desc = "Edit init.lua" })

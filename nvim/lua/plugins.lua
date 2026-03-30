@@ -68,7 +68,6 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = { "ts_ls", "pyright", "lua_ls"},
         automatic_installation = false,
-        automatic_enable = false, -- Neovim 0.9 lacks vim.lsp.enable
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({ capabilities = caps })
@@ -92,4 +91,13 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  }
 }

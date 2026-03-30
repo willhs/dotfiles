@@ -29,7 +29,18 @@ sudo apt install -y \
   imagemagick \
   nodejs \
   npm \
-  neovim
+  neovim \
+  fd-find \
+  tmux \
+  tree \
+  ruby \
+  ruby-dev
+
+# On Ubuntu, fd is installed as fdfind — create a symlink so scripts can use `fd`
+if [ ! -f ~/.local/bin/fd ] && command -v fdfind >/dev/null 2>&1; then
+  mkdir -p ~/.local/bin
+  ln -s "$(command -v fdfind)" ~/.local/bin/fd
+fi
 
 # Install modern terminal tools
 echo "› Installing modern terminal tools..."
@@ -85,6 +96,16 @@ if ! fc-list | grep -qi "nerd"; then
   echo "› Nerd Font installed! Configure your terminal to use 'FiraCode Nerd Font'"
 else
   echo "› Nerd Font already installed"
+fi
+
+# GitHub CLI
+if ! command -v gh &> /dev/null; then
+  echo "› Installing GitHub CLI..."
+  sudo mkdir -p -m 755 /etc/apt/keyrings
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+  sudo apt update
+  sudo apt install -y gh
 fi
 
 # Set zsh as default shell if it's not already

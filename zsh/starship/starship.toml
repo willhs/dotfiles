@@ -51,4 +51,5 @@ style = "dimmed white"
 
 [os.symbols]
 Macos = ""
-Linux = "🐧"
+Linux = "󰌽"
+Ubuntu = "󰌽"

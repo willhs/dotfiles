@@ -1,0 +1,5 @@
+#!/bin/bash
+# Wrapper for gent - centralized AI agent configuration manager
+# https://github.com/willhs/gent
+
+exec "$HOME/projects/gent/bin/gent" "$@"

@@ -1,10 +1,43 @@
 #!/usr/bin/env bash
 #
-# Run all dotfiles installers.
+# Run dotfiles installers for the active profile.
+#
+# Profile is read from ~/.dotfiles-profile (e.g. "workstation" or "server").
+# The matching file in profiles/<name>.conf lists which topics to install.
+# If no profile is set, all installers run (backwards-compatible).
 
 set -e
 
 cd "$(dirname $0)"/..
+DOTFILES_ROOT=$(pwd -P)
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+PROFILE_NAME=""
+if [ -f "$HOME/.dotfiles-profile" ]; then
+  PROFILE_NAME=$(cat "$HOME/.dotfiles-profile" | tr -d '[:space:]')
+fi
+
+if [ -n "$PROFILE_NAME" ]; then
+  PROFILE_FILE="$DOTFILES_ROOT/profiles/${PROFILE_NAME}.conf"
+  if [ ! -f "$PROFILE_FILE" ]; then
+    echo "Profile '$PROFILE_NAME' not found at $PROFILE_FILE" >&2
+    exit 1
+  fi
+
+  echo "Installing with profile: $PROFILE_NAME"
+
+  # Read allowed topics (skip comments and blank lines)
+  while IFS= read -r topic || [ -n "$topic" ]; do
+    topic=$(echo "$topic" | tr -d '[:space:]')
+    [ -z "$topic" ] && continue
+    [[ "$topic" == \#* ]] && continue
+
+    installer="$DOTFILES_ROOT/$topic/install.sh"
+    if [ -f "$installer" ]; then
+      echo "  -> $topic"
+      sh -c "$installer"
+    fi
+  done < "$PROFILE_FILE"
+else
+  echo "No profile set (~/.dotfiles-profile), running all installers"
+  find . -name install.sh | while read installer; do sh -c "${installer}"; done
+fi
