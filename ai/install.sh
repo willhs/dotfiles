@@ -29,6 +29,25 @@ if [ -x "$GENT_DIR/bin/gent" ]; then
   "$GENT_DIR/bin/gent" init --global
 fi
 
+# --- Claude Scripts (statusline, fetch-usage) ---
+echo "Linking Claude scripts..."
+mkdir -p "$HOME/.claude"
+for script in "$DOTFILES_AI/claude"/*.py; do
+  [ -e "$script" ] || continue
+  name=$(basename "$script")
+  target="$HOME/.claude/$name"
+
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$script" ]; then
+    echo "  ✓ $name (already linked)"
+    continue
+  fi
+
+  rm -f "$target"
+  ln -s "$script" "$target"
+  chmod +x "$script"
+  echo "  → $name"
+done
+
 # --- Claude Agents ---
 echo "Linking Claude agents..."
 CLAUDE_AGENTS="$HOME/.claude/agents"
