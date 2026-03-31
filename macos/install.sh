@@ -55,7 +55,7 @@ brew_bundle() {
 
   log "Installing packages from Brewfile"
   brew update
-  brew bundle --file="${BREWFILE_PATH}" --no-lock
+  brew bundle --file="${BREWFILE_PATH}"
 }
 
 run_software_update() {

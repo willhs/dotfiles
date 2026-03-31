@@ -60,6 +60,17 @@ bind -n C-J resize-pane -D 1
 bind -n C-K resize-pane -U 1
 bind -n C-L resize-pane -R 1
 
+# Layout
+bind Space select-layout main-horizontal
+
 # Mouse support
 set -g mouse on
 set -g focus-events on
+
+# Copy to system clipboard via OSC 52 (works in WezTerm, iTerm2, etc.)
+set -g set-clipboard on
+
+# Only copy to clipboard on drag selection, not single clicks
+# copy-pipe sends to OSC 52 via set-clipboard; no pbcopy needed
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
+bind -T copy-mode    MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
