@@ -39,7 +39,7 @@ set -g status-right '#{pane_current_command} | %Y-%m-%d %H:%M'
 # Colours (tmux 3.2+ style syntax)
 set -g status-style "fg=white,bg=colour235"
 set -g pane-border-style "fg=colour245"
-set -g pane-active-border-style "fg=colour39"
+set -g pane-active-border-style "fg=colour255,bg=colour24,bold"
 set -g message-style "fg=colour16,bg=colour221,bold"
 
 # Vim style panes
