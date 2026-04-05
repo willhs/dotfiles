@@ -38,6 +38,9 @@ defaults write -g InitialKeyRepeat -int 13
 # Enable full keyboard access for all controls (e.g. Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
+# Remap Caps Lock to Escape (for the built-in keyboard; product ID 0 = all)
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029}]}' > /dev/null
+
 ###############################################################################
 # Locale                                                                      #
 ###############################################################################
