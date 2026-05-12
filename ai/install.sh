@@ -48,6 +48,27 @@ for script in "$DOTFILES_AI/claude"/*.py; do
   echo "  → $name"
 done
 
+# --- Claude Hooks ---
+echo "Linking Claude hooks..."
+CLAUDE_HOOKS="$HOME/.claude/hooks"
+mkdir -p "$CLAUDE_HOOKS"
+
+for hook in "$DOTFILES_AI/claude/hooks"/*.py; do
+  [ -e "$hook" ] || continue
+  name=$(basename "$hook")
+  target="$CLAUDE_HOOKS/$name"
+
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$hook" ]; then
+    echo "  ✓ $name (already linked)"
+    continue
+  fi
+
+  rm -f "$target"
+  ln -s "$hook" "$target"
+  chmod +x "$hook"
+  echo "  → $name"
+done
+
 # --- Claude Agents ---
 echo "Linking Claude agents..."
 CLAUDE_AGENTS="$HOME/.claude/agents"
