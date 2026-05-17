@@ -17,7 +17,7 @@ Most users work with global mode (`--global` flag).
 
 ### What Gent Manages
 1. **Rules** - Agent instructions (CLAUDE.md, AGENTS.md, etc.)
-2. **MCP Servers** - Model Context Protocol server definitions
+2. **MCP Servers** - Shared and agent-specific Model Context Protocol server definitions
 3. **Skills** - Shared skill directories for Claude and Codex
 
 ## Common Workflows
@@ -59,7 +59,8 @@ Restores original agent config from backup.
 |------|-----------------|
 | Central rules | `~/.config/gent/rules.md` |
 | Agent-specific rules | `~/.config/gent/rules.claude.md`, `rules.codex.md` |
-| MCP config | `~/.config/gent/mcp.yaml` |
+| Shared MCP config | `~/.config/gent/mcp.yaml` |
+| Agent-specific MCP config | `~/.config/gent/mcp.claude.yaml`, `mcp.codex.yaml` |
 | Skills | `~/.config/gent/skills/` |
 | Backups | `~/.config/gent/original_configs/` |
 
@@ -78,7 +79,7 @@ Edit `~/.config/gent/rules.md` once, all linked agents use those rules.
 The agent config already exists. Gent backs up existing configs before linking. Run `gent link <agent> --global` and it will handle the backup.
 
 ### MCP servers not syncing
-Check `~/.config/gent/mcp.yaml` for the central MCP config. Gent converts between formats (JSON for Claude, TOML for Codex).
+Check `~/.config/gent/mcp.yaml` for shared MCP servers, and `~/.config/gent/mcp.<agent>.yaml` for agent-specific servers. Gent merges shared plus agent-specific YAML and converts between formats (JSON for Claude, TOML for Codex).
 
 ### Skills not appearing
 Ensure skills are in `~/.config/gent/skills/` with proper SKILL.md files. Run `gent sync --global` to update symlinks.
