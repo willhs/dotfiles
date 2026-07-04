@@ -71,39 +71,6 @@ def send_event(state):
         return None
 
 
-def find_tmux_pane(tty):
-    """Look up tmux pane ID for the given TTY path."""
-    import subprocess
-    try:
-        result = subprocess.run(
-            ["tmux", "list-panes", "-a", "-F", "#{pane_id} #{pane_tty}"],
-            capture_output=True, text=True, timeout=2
-        )
-        for line in result.stdout.splitlines():
-            parts = line.split(None, 1)
-            if len(parts) == 2 and parts[1] == tty:
-                return parts[0]
-    except Exception:
-        pass
-    return None
-
-
-def tint_tmux_pane(tty, status):
-    """Set or clear background tint on the tmux pane for this Claude session."""
-    import subprocess
-    pane_id = find_tmux_pane(tty)
-    if not pane_id:
-        return
-    style = "bg=colour52" if status == "waiting_for_input" else "default"
-    try:
-        subprocess.run(
-            ["tmux", "select-pane", "-t", pane_id, "-P", style],
-            timeout=2, capture_output=True
-        )
-    except Exception:
-        pass
-
-
 def main():
     if os.environ.get("MANAGER_HEADLESS"):
         sys.exit(0)
