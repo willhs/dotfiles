@@ -1,0 +1,33 @@
+# herdr — terminal workspace manager for AI coding agents
+# https://herdr.dev  •  config reference: `herdr config reset-keys` prints defaults
+#
+# Symlinked to ~/.config/herdr/config.toml by herdr/install.sh.
+# Reload a running server after editing: `herdr server reload-config`
+#
+# Keybindings mirror our tmux setup (misc/tmux.conf.symlink) where it makes sense.
+# Only actions that differ from herdr's built-in v2 defaults are set below.
+
+[keys]
+# Prefix — tmux muscle memory is ctrl+a.
+# Trade-off: ctrl+a shadows shell beginning-of-line in every pane and herdr has
+# no send-prefix escape. If that bites, swap to the ergonomic modern default:
+#   prefix = "ctrl+space"
+prefix = "ctrl+a"
+
+# Splits — tmux: | = side-by-side, - = stacked.
+# (- / split_horizontal is already the herdr default; set explicitly for clarity.)
+split_vertical   = "prefix+|"
+split_horizontal = "prefix+minus"
+
+# Reload config on prefix+r (tmux `bind r`); move resize-mode off r to make room.
+reload_config = "prefix+r"
+resize_mode   = "prefix+shift+r"
+
+# Window keys — tmux binds capital H/J/K/L for windows; herdr's nearest is tabs.
+new_tab       = "prefix+shift+j"   # tmux J = new-window
+close_tab     = "prefix+shift+k"   # tmux K = kill-window
+previous_tab  = "prefix+shift+h"   # tmux H = prev
+next_tab      = "prefix+shift+l"   # tmux L = next
+
+# Pane focus h/j/k/l already matches tmux (herdr default focus_pane_left/down/up/right
+# = prefix+h/j/k/l), so it's intentionally left at the default.
