@@ -21,3 +21,5 @@ Thumbs.db
 .settings
 .project
 .classpath # not only eclipse but still usually not worth keeping
+
+**/.claude/settings.local.json
