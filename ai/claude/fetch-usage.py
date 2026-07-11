@@ -4,7 +4,7 @@ Meant to run in background via hooks. No output on success."""
 import json, os, sys, time, subprocess
 
 CACHE = "/tmp/.claude_usage_cache"
-TOKEN_CACHE = "/tmp/.claude_token_cache"
+TOKEN_CACHE = os.path.expanduser("~/.claude/.token_cache")
 CREDS = os.path.expanduser("~/.claude/.credentials.json")
 KEYCHAIN_SERVICE = "Claude Code-credentials"
 TOKEN_TTL = 900
@@ -32,7 +32,8 @@ if not token:
             pass
     if not token:
         sys.exit(0)
-    with open(TOKEN_CACHE, "w") as f:
+    fd = os.open(TOKEN_CACHE, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as f:
         f.write(token)
 
 # --- Fetch usage via curl (avoids Python SSL cert issues on macOS) ---
