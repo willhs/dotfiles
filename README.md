@@ -2,6 +2,8 @@
 
 Opinionated dotfiles for quickly installing my shell, editor, and tooling across Unix-based systems (macOS, Ubuntu, WSL). The goal is a repeatable bootstrap with only the tools I actually rely on.
 
+Project documentation lives in [`docs/`](docs/index.md) — vision, architecture, roadmap, and operational runbook.
+
 ## Install
 
 ```sh
