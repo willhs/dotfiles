@@ -7,6 +7,9 @@
 # Keybindings mirror our tmux setup (misc/tmux.conf.symlink) where it makes sense.
 # Only actions that differ from herdr's built-in v2 defaults are set below.
 
+# Skip the first-run onboarding flow.
+onboarding = false
+
 [keys]
 # Prefix — tmux muscle memory is ctrl+a.
 # Trade-off: ctrl+a shadows shell beginning-of-line in every pane and herdr has
@@ -31,3 +34,6 @@ next_tab      = "prefix+shift+l"   # tmux L = next
 
 # Pane focus h/j/k/l already matches tmux (herdr default focus_pane_left/down/up/right
 # = prefix+h/j/k/l), so it's intentionally left at the default.
+
+[ui]
+agent_panel_sort = "spaces"
