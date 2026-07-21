@@ -34,3 +34,31 @@ next_tab      = "prefix+shift+l"   # tmux L = next
 
 # Pane focus h/j/k/l already matches tmux (herdr default focus_pane_left/down/up/right
 # = prefix+h/j/k/l), so it's intentionally left at the default.
+
+# Seamless nav across nvim splits + herdr panes — vim-tmux-navigator style.
+# Provided by the vendored `vim-herdr-navigation` plugin (plugins/vim-herdr-navigation/),
+# linked by install.sh. Alt (not Ctrl) chords so we keep readline Ctrl+L/Ctrl+K in
+# shells and the <C-h>/<C-l> jump aliases in nvim. Editor side: nvim/lua/herdr-nav.lua.
+[[keys.command]]
+key = "alt+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "alt+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "alt+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "alt+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"

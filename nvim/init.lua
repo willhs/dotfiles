@@ -1,6 +1,7 @@
 require("compat")
 require("options")
 require("keymaps")
+require("herdr-nav") -- <A-h/j/k/l> seamless nav across nvim splits + herdr panes
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

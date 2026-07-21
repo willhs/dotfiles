@@ -283,6 +283,20 @@ preview channel (`herdr channel set preview`) unless we want early fixes; `exper
 
 ---
 
+## Installed plugins
+
+- **`vim-herdr-navigation`** (vendored, Alt-chord fork of
+  [paulbkim-dev/vim-herdr-navigation](https://github.com/paulbkim-dev/vim-herdr-navigation)).
+  Seamless `Alt+h/j/k/l` navigation across Neovim splits and herdr panes
+  (vim-tmux-navigator, ported). We use **Alt** rather than upstream Ctrl so it
+  doesn't shadow readline `Ctrl+L`/`Ctrl+K` in shells or collide with our
+  JetBrains-style `<C-h>`/`<C-l>` jump aliases in nvim.
+  - herdr side: `herdr/plugins/vim-herdr-navigation/` (manifest + `navigate.sh`),
+    linked by `herdr/install.sh`, keybindings in `herdr/config.toml`.
+  - editor side: `nvim/lua/herdr-nav.lua`, required from `nvim/init.lua`.
+  - After a fresh checkout / worktree merge: run `herdr/install.sh` (relinks the
+    plugin to the canonical path) then `herdr server reload-config`.
+
 ## Appendix — command cheatsheet
 
 ```

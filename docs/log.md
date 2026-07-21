@@ -10,6 +10,10 @@ related: ["index.md"]
 
 # docs/ Log
 
+## [2026-07-21] update | Add vim-herdr-navigation plugin (Alt-chord fork)
+
+Vendored `paulbkim-dev/vim-herdr-navigation` as an Alt+h/j/k/l fork under `herdr/plugins/`, wired the editor side into `nvim/` (`lua/herdr-nav.lua`, required from `init.lua`), added `alt+*` bindings to `herdr/config.toml`, and made `herdr/install.sh` link vendored plugins idempotently. Alt avoids clobbering readline Ctrl+L/K and the JetBrains `<C-h>`/`<C-l>` jump aliases. Documented in the config tour.
+
 ## [2026-07-21] create | herdr config tour & extensibility review
 
 Surveyed herdr 0.7.1 end-to-end (default config, all CLI subcommands, shipped CHANGELOG, and herdr.dev docs). Documented the config surface, 11 built-in themes + token overrides, agent integrations, the 75-method socket API, and the v1 plugin system (git-installable, event hooks, actions, panes, link handlers). Added `reference/herdr-config-tour.md` with ordered recommendations and a scoped `will-steady` plugin proposal.
