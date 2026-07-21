@@ -6,6 +6,9 @@
 #
 # Keybindings mirror our tmux setup (misc/tmux.conf.symlink) where it makes sense.
 # Only actions that differ from herdr's built-in v2 defaults are set below.
+#
+# Full config/theme/integration/plugin tour & recommendations:
+#   docs/reference/herdr-config-tour.md
 
 [keys]
 # Prefix — tmux muscle memory is ctrl+a.

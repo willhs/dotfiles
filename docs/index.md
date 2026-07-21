@@ -30,6 +30,10 @@ related: ["front-matter.md", "front-matter-schema.json"]
 
 - [`ops/runbook.md`](ops/runbook.md) — How to bootstrap a machine, re-run installers, add a topic, and recover from common breakage.
 
+## Reference
+
+- [`reference/herdr-config-tour.md`](reference/herdr-config-tour.md) — Tour of herdr 0.7.1's full config, theme, integration, socket-API, and plugin surface, with recommendations for our Manager/Steady agent workflow.
+
 ## Meta
 
 - [`front-matter.md`](front-matter.md) — Human-readable guide to the frontmatter schema and doc types.
