@@ -32,7 +32,7 @@ related: ["front-matter.md", "front-matter-schema.json"]
 
 ## Reference
 
-- [`reference/herdr-config-tour.md`](reference/herdr-config-tour.md) — Tour of herdr 0.7.1's full config, theme, integration, socket-API, and plugin surface, with recommendations for our Manager/Steady agent workflow.
+- [`reference/herdr-config-tour.md`](reference/herdr-config-tour.md) — Tour of herdr 0.8.0's full config, theme, integration, socket-API, and plugin surface, including sidebar row tokens, with recommendations for our Manager/Steady agent workflow.
 
 ## Meta
 

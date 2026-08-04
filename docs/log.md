@@ -10,6 +10,15 @@ related: ["index.md"]
 
 # docs/ Log
 
+## [2026-08-04] update | herdr config tour & extensibility review
+
+Added a `[ui.sidebar.agents]` section documenting the sidebar row-token system (0.7.4+) and why we
+lead with `terminal_title_stripped` instead of the default `workspace` label — Manager packs
+unrelated worktrees into one space, so space names identify nothing. Captured four gotchas, the
+sharpest being that unknown keys *inside* a known section are silently ignored: on 0.7.1 the whole
+`[ui.sidebar]` table was discarded while `reload-config` still reported `applied` with no
+diagnostics. Refreshed the version snapshot to 0.8.0.
+
 ## [2026-07-21] update | Add vim-herdr-navigation plugin (Alt-chord fork)
 
 Vendored `paulbkim-dev/vim-herdr-navigation` as an Alt+h/j/k/l fork under `herdr/plugins/`, wired the editor side into `nvim/` (`lua/herdr-nav.lua`, required from `init.lua`), added `alt+*` bindings to `herdr/config.toml`, and made `herdr/install.sh` link vendored plugins idempotently. Alt avoids clobbering readline Ctrl+L/K and the JetBrains `<C-h>`/`<C-l>` jump aliases. Documented in the config tour.

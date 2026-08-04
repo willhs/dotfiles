@@ -1,3 +1,4 @@
+onboarding = false
 # herdr — terminal workspace manager for AI coding agents
 # https://herdr.dev  •  config reference: `herdr config reset-keys` prints defaults
 #
@@ -62,3 +63,19 @@ key = "alt+l"
 type = "plugin_action"
 command = "vim-herdr-navigation.right"
 description = "navigate right (vim/herdr)"
+
+[ui]
+agent_panel_sort = "priority"
+
+# Agent rows default to [state_icon, workspace, tab] + [agent], which labels every
+# pane with its *space* name — useless when manager drops several unrelated jobs
+# into one space. Lead with the pane's own terminal title instead.
+# Note: a row whose tokens all resolve to None is dropped, so workspace stays on
+# row 2 as the fallback identity when a pane sets no title.
+# Row 2 is workspace only: `agent` is always "claude" here and `state_text` just
+# repeats the state icon — three tokens in a ~30col sidebar truncated all of them.
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "terminal_title_stripped"],
+  [{ token = "workspace", dim = true }],
+]

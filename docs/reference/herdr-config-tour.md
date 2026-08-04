@@ -10,7 +10,7 @@ related: ["../../herdr/config.toml", "../design/architecture.md"]
 
 # herdr config tour & extensibility review
 
-> Snapshot: herdr **0.7.1** (stable channel), installed via Homebrew, server running.
+> Snapshot: herdr **0.8.0** (stable channel), installed via Homebrew, server running.
 > Sources: `herdr --default-config`, `herdr <cmd> --help`, the shipped `CHANGELOG.md`,
 > and the official docs (`herdr.dev/docs/{configuration,integrations,socket-api,plugins}`).
 > Our config lives at `herdr/config.toml`, symlinked to `~/.config/herdr/config.toml`.
@@ -48,7 +48,7 @@ Sections and the knobs worth knowing:
 | `[terminal]` | New-pane shell behaviour | `default_shell`, `shell_mode` (`auto`/`login`/`non_login`), `new_cwd` (`follow`/`home`/`current`/fixed path) |
 | `[update]` | Channel + background checks | `channel` (`stable`/`preview`), `version_check`, `manifest_check` |
 | `[keys]` | Prefix + all bindings | `[[keys.command]]` custom commands (shell/pane/plugin_action), `[keys.indexed]` legacy direct 1..9 |
-| `[ui]` | Layout, mouse, sidebar | `pane_borders`, `pane_gaps`, `agent_panel_sort` (`spaces`/`priority`), `accent`, `mouse_capture`, `mobile_width_threshold` |
+| `[ui]` | Layout, mouse, sidebar | `pane_borders`, `pane_gaps`, `agent_panel_sort` (`spaces`/`priority`), `accent`, `mouse_capture`, `mobile_width_threshold`, `sidebar_width`/`sidebar_max_width`, `[ui.sidebar.*]` row tokens |
 | `[ui.toast]` | Background notifications | `delivery` (`off`/`herdr`/`terminal`/`system`), in-app position, clipboard-copy toast |
 | `[ui.sound]` | Per-state / per-agent sounds | custom mp3 paths, `[ui.sound.agents]` per-agent `on`/`off` (droid muted by default) |
 | `[session]` | Restore behaviour | `resume_agents_on_restore` (default **true**) — resumes native agent sessions after a server restart |
@@ -56,6 +56,42 @@ Sections and the knobs worth knowing:
 | `[worktrees]` | Worktree location | `directory` (default `~/.herdr/worktrees`) |
 | `[experimental]` | Opt-in bleeding edge | `allow_nested`, `kitty_graphics`, `pane_history`, CJK/IME cursor reveal knobs |
 | `[advanced]` | Buffers | `scrollback_limit_bytes` (default 10 MB, Ghostty-like) |
+
+### Sidebar rows — `[ui.sidebar.agents]` / `[ui.sidebar.spaces]`
+
+The expanded sidebar's row composition is configurable as token lists (added in **0.7.4**).
+Agent tokens: `state_icon`, `state_text`, `workspace`, `tab`, `pane`, `agent`, `terminal_title`,
+`terminal_title_stripped` (spinner glyph removed), `$custom`. Any token may be an inline table
+carrying `fg`/`bold`/`dim`.
+
+The **default** agent rows are `[state_icon, workspace, tab]` + `[agent]` — i.e. every agent row
+is labelled with its *space* name. That's actively misleading in our setup, because Manager drops
+unrelated jobs into an existing space as extra panes, so several different worktrees all render
+under one label. Leading with `terminal_title_stripped` shows Claude Code's own task summary
+instead. Ours:
+
+```toml
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "terminal_title_stripped"],
+  [{ token = "workspace", dim = true }],
+]
+```
+
+Gotchas:
+
+- **A row whose tokens all resolve to `None` is dropped entirely.** `terminal_title*` is `None`
+  when the pane sets no OSC title, so keep an always-present token (`workspace`) on its own row
+  as fallback identity.
+- **Keep rows short.** At our ~30-column sidebar, three tokens on one row truncates all three
+  (`add-w… · claude · idle`). `agent` is always `claude` for us and `state_text` just repeats
+  `state_icon` — both dropped.
+- **Unknown keys *inside* a known section are silently ignored** — only unknown *top-level*
+  sections warn. On 0.7.1 the whole `[ui.sidebar]` table was discarded with
+  `status: applied, diagnostics: []`, and the API omitted `terminal_title` (it's
+  `skip_serializing_if = Option::is_none`), which reads exactly like "the agent isn't emitting
+  titles". `herdr config check` against a current binary is the reliable validator.
+- It's `[ui.sidebar.agents]`, not `[sidebar.agents]` — `SidebarConfig` hangs off `UiConfig`.
 
 ### Custom command bindings — the "no-plugin" extension point
 
