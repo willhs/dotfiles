@@ -7,7 +7,7 @@ Project documentation lives in [`docs/`](docs/index.md) — vision, architecture
 ## Install
 
 ```sh
-git clone https://github.com/will/dotfiles.git ~/dotfiles
+git clone https://github.com/willhs/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 script/bootstrap
 ```
@@ -22,7 +22,9 @@ Re-run the platform script later to pick up updates.
 - Shell: zsh configuration, aliases, functions, and PATH management sourced from `zsh/` and `system/`.
 - Tooling: Homebrew or apt provisioning plus helper scripts under `bin/`.
 - Editors: Neovim configuration ready to link into `$HOME` via `script/bootstrap`.
+- Terminal: WezTerm and herdr (multiplexer) configs under `wezterm/` and `herdr/`.
 - Git: Global git config, aliases, and helpers under `git/`.
+- AI tooling: Claude Code scripts, hooks, and gent-managed agent config under `ai/`.
 - Extras: Optional configs in `misc/` for tmux, i3, and other utilities.
 
 Files ending in `.symlink` are linked into `$HOME` by `script/bootstrap`. All `*.zsh` files are auto-sourced by the loader in `zsh/zshrc.symlink`. Sensitive, host-specific environment variables belong in `~/.localrc`, which remains untracked but is sourced automatically if present.

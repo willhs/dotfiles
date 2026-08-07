@@ -10,6 +10,15 @@ related: ["index.md"]
 
 # docs/ Log
 
+## [2026-08-08] update | README install/topic accuracy (dream cycle)
+
+Fixed a wrong clone URL in `README.md` (`github.com/will/dotfiles` → `github.com/willhs/dotfiles`,
+matching `origin` and `docs/ops/runbook.md`, which already had it right) and added the missing
+terminal (`wezterm/`, `herdr/`) and AI tooling (`ai/`) topics to the "What it sets up" list, which
+had drifted behind `docs/design/architecture.md`. `CLAUDE.md` has the same staleness (missing
+`ai/`, `herdr/`, `profiles/`, `wezterm/` in its Topic Areas) but is a symlink to an untracked,
+gent-managed file outside this worktree — filed as a Steady idea instead of edited directly.
+
 ## [2026-08-04] update | herdr config tour & extensibility review
 
 Added a `[ui.sidebar.agents]` section documenting the sidebar row-token system (0.7.4+) and why we
