@@ -11,6 +11,9 @@ onboarding = false
 # Full config/theme/integration/plugin tour & recommendations:
 #   docs/reference/herdr-config-tour.md
 
+# Skip the first-run onboarding flow.
+onboarding = false
+
 [keys]
 # Prefix — tmux muscle memory is ctrl+a.
 # Trade-off: ctrl+a shadows shell beginning-of-line in every pane and herdr has
