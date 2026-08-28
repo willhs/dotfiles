@@ -7,6 +7,11 @@ data = json.load(sys.stdin)
 # --- Model ---
 model = data["model"]["display_name"]
 
+# --- Effort ---
+EFFORT_ABBR = {"low": "lo", "medium": "md", "high": "hi", "xhigh": "xh", "max": "mx"}
+effort = (data.get("effort") or {}).get("level", "")
+effort_str = EFFORT_ABBR.get(effort, "")
+
 # --- Folder + git branch ---
 cwd = os.path.basename(os.getcwd())
 branch = ""
@@ -82,6 +87,14 @@ P = "\033[1m\033[38;2;192;103;222m"  # purple bold - branch
 G = "\033[90m"  # gray - separators
 M = "\033[38;2;156;162;175m"  # muted - stats
 D = "\033[2m\033[38;2;156;162;175m"  # dim muted - reset timers
+# effort accents - cool (low) to hot (max)
+EFFORT_COLOR = {
+    "low": "\033[38;2;122;192;140m",  # green
+    "medium": "\033[38;2;76;208;222m",  # teal
+    "high": "\033[38;2;232;193;92m",  # amber
+    "xhigh": "\033[1m\033[38;2;192;103;222m",  # purple bold
+    "max": "\033[1m\033[38;2;232;96;96m",  # red bold
+}
 R = "\033[0m"  # reset
 
 SEP = f"{G} | {R}"
@@ -89,7 +102,10 @@ DOT = f"{G} \u2022 {R}"
 
 # --- Assemble ---
 # Opus 4.6 | my-project • main | ctx 35% | 5h:54% 2h15m • 7d:33% 4d23h
-parts = [f"{O}{model}{R}"]
+model_str = f"{O}{model}{R}"
+if effort_str:
+    model_str += f" {EFFORT_COLOR.get(effort, M)}{effort_str}{R}"
+parts = [model_str]
 
 loc = f"{T}{cwd}{R}"
 if branch:
