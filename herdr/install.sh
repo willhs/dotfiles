@@ -21,6 +21,26 @@ if [ "$(readlink "${HERDR_DEST}" 2>/dev/null)" != "${HERDR_SRC}" ]; then
   ln -sfn "${HERDR_SRC}" "${HERDR_DEST}"
 fi
 
+# Install agent state-reporting integrations (pi extension, claude/codex hooks).
+# Without these herdr falls back to terminal-title/screen detection and pi gets no
+# loading states at all (see docs/reference/herdr-config-tour.md §3). Idempotent:
+# skip while "current", reinstall when missing or outdated (e.g. after herdr bumps
+# the integration version) on the next `script/install` run.
+if command -v herdr >/dev/null 2>&1; then
+  # status writes to stderr; capture once — repeated calls right after an install
+  # can race with the server's view of the integration version.
+  integration_status="$(herdr integration status 2>&1 || true)"
+  for agent in pi claude codex; do
+    if grep -qF "${agent}: current" <<<"${integration_status}"; then
+      log "herdr integration up to date: ${agent}"
+    elif herdr integration install "${agent}" >/dev/null 2>&1; then
+      log "Installed herdr integration: ${agent}"
+    else
+      log "Skipped herdr integration ${agent} (install failed?)"
+    fi
+  done
+fi
+
 # Link vendored herdr plugins (idempotent; needs a running herdr server + CLI).
 if command -v herdr >/dev/null 2>&1; then
   for plugin_dir in "${SCRIPT_DIR}"/plugins/*/; do

@@ -28,9 +28,10 @@ related: ["../../herdr/config.toml", "../design/architecture.md"]
   link handlers), a documented **socket/JSON-RPC API** (75 methods), **agent lifecycle
   integrations** that install hooks into each agent's config dir, and **theme customisation**
   down to individual colour tokens with light/dark auto-switching.
-- **Biggest unrealised wins for us**: (1) `herdr integration install claude` for real
-  blocked/done detection + session restore; (2) `[theme].auto_switch`; (3) a small
-  **`herdr-steady` plugin** bridging herdr's agent-state events to Manager/Steady. Details below.
+- **Biggest unrealised wins for us**: (1) ~~`herdr integration install claude`~~ *done —
+  `herdr/install.sh` now auto-installs pi/claude/codex integrations*; (2) `[theme].auto_switch`;
+  (3) a small **`herdr-steady` plugin** bridging herdr's agent-state events to Manager/Steady.
+  Details below.
 
 ---
 
@@ -150,8 +151,11 @@ tracks the terminal instead of hard-committing to one palette. Low-risk, purely 
 agent's own config directory. Supported: `pi`, `omp`, `claude`, `codex`, `copilot`,
 `devin`, `droid`, `kimi`, `opencode`, `kilo`, `hermes`, `qodercli`, `cursor`.
 
-For Claude Code it writes `~/.claude/hooks/herdr-agent-state.sh`. `herdr integration status`
-shows install state per agent. **Currently everything reads `not installed` on this machine.**
+For Claude Code it writes `~/.claude/hooks/herdr-agent-state.sh`; for pi,
+`~/.pi/agent/extensions/herdr-agent-state.ts`. `herdr integration status`
+shows install state per agent. `herdr/install.sh` auto-installs/refreshes the
+integrations for the agents we use interactively (`pi`, `claude`, `codex`) —
+skipping while current, reinstalling after herdr bumps the integration version.
 
 Two capability tiers (from the changelog):
 
@@ -166,8 +170,9 @@ which manifest rule matched and why a pane is idle/working/blocked, and remote a
 manifests auto-update. So even without the hook you get state; the hook adds **session restore**
 and, for lifecycle agents, more reliable blocked detection.
 
-**Recommendation:** run `herdr integration install claude` (and `codex` if used interactively).
-It's additive, reversible (`herdr integration uninstall claude`), and gives us
+**Recommendation:** nothing to do manually — `herdr/install.sh` handles it (that's how
+pi, claude and codex got theirs). It's additive, reversible (`herdr integration
+uninstall <agent>`), and gives us
 resume-after-restart + cleaner "blocked / needs input" signals in the Agents panel. Worth
 noting the two Claude hook files won't collide — herdr's is `herdr-agent-state.sh`, ours is
 `claude-island-state.py`/`bash-antipattern-guard.py`.
@@ -301,8 +306,8 @@ pieces (link handler + board pane) before anything that writes task state.
 
 ## 7. Concrete recommendations (ordered by value ÷ effort)
 
-1. **`herdr integration install claude`** (and `codex` if used interactively). Additive,
-   reversible, gives session-restore + better blocked detection. *(config-free, do first)*
+1. ~~**`herdr integration install claude`** (and `codex` if used interactively).~~ *Done —
+   automated in `herdr/install.sh`, which also covers the pi extension.*
 2. **`[theme].auto_switch = true`** or `[theme.custom] panel_bg = "reset"` so herdr tracks
    WezTerm's light/dark instead of a fixed palette. *(one-line config)*
 3. **`[ui].agent_panel_sort = "priority"`** — surface the agent most needing attention first,

@@ -10,6 +10,17 @@ related: ["index.md"]
 
 # docs/ Log
 
+## [2026-08-11] update | Wire herdr agent integrations into install.sh
+
+The pi state-reporting integration was never installed (`herdr integration status` read
+"pi: not installed"), so herdr showed no loading states for pi panes — its extension
+(`~/.pi/agent/extensions/herdr-agent-state.ts`, reporting working/blocked/idle over the
+herdr socket) was simply missing, while claude/codex hooks had been installed manually.
+Added idempotent install/refresh of `pi`, `claude`, `codex` integrations to
+`herdr/install.sh` (skip while current, reinstall on version bump; note `herdr
+integration status` writes to stderr), and refreshed the stale "not installed" notes in
+`reference/herdr-config-tour.md`.
+
 ## [2026-08-08] update | README install/topic accuracy (dream cycle)
 
 Fixed a wrong clone URL in `README.md` (`github.com/will/dotfiles` → `github.com/willhs/dotfiles`,
