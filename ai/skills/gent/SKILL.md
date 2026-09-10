@@ -5,7 +5,7 @@ description: This skill should be used when the user asks about managing AI agen
 
 # Gent - Centralized AI Agent Configuration
 
-Gent is a CLI tool for managing AI agent configuration across multiple tools (Claude Code, Codex, Windsurf) from a single source of truth.
+Gent is a CLI tool for managing AI agent configuration across multiple tools (Claude Code, Codex, Windsurf, Pi) from a single source of truth.
 
 ## Core Concepts
 
@@ -28,11 +28,14 @@ gent init --global
 ```
 Links all supported agents to central config at `~/.config/gent/`.
 
+Note: Pi reads skills from `~/.agents/skills/` natively, so it gets both the gent central skills (via symlink) and the shared `~/.agents/skills` directory.
+
 ### Link Specific Agent
 ```bash
 gent link claude --global
 gent link codex --global
 gent link windsurf --global
+gent link pi --global
 ```
 
 ### Check Status
@@ -51,6 +54,15 @@ Updates symlinks if paths changed, resyncs MCP configs.
 ```bash
 gent unlink claude --global
 ```
+
+## Agent Config Locations
+
+| Agent | Rules | MCP | Skills (global) |
+|-------|-------|-----|-----------------|
+| Claude Code | `~/.claude/CLAUDE.md` | `~/.claude.json` | `~/.claude/skills/` |
+| Codex | `~/.codex/AGENTS.md` | `~/.codex/config.toml` | `~/.codex/skills/` |
+| Windsurf | `~/.codeium/windsurf/memories/global_rules.md` | N/A | N/A |
+| Pi | `~/.pi/agent/AGENTS.md` | `~/.pi/agent/mcp.json` | `~/.pi/agent/skills/` |
 Restores original agent config from backup.
 
 ## Config Locations

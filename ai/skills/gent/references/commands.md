@@ -27,12 +27,14 @@ Link a specific agent to gent's central config.
 gent link claude --global
 gent link codex --global
 gent link windsurf --global
+gent link pi --global
 ```
 
 **Supported agents:**
 - `claude` or `claude code` - Claude Code
 - `codex` - OpenAI Codex
 - `windsurf` - Windsurf
+- `pi` - Pi coding agent (OpenRouter-backed)
 
 ### `gent unlink <agent> [--global]`
 Restore an agent to its original (pre-gent) configuration.
@@ -125,6 +127,7 @@ filesystem:
 Gent converts this to:
 - JSON for Claude Code (`~/.claude.json`)
 - TOML for Codex (`~/.codex/config.toml`)
+- JSON for Pi (`~/.pi/agent/mcp.json`)
 
 ---
 
@@ -141,8 +144,13 @@ Gent converts this to:
 │   ├── skill-name/
 │   │   └── SKILL.md
 │   └── ...
-└── original_configs/     # Backups of original agent configs
-    ├── claude_code_CLAUDE.md
+└── original_configs/     # Backups of original agent configs (per-agent subdirs)
+    ├── claude_code/
+    │   ├── CLAUDE.md
+    │   └── .claude.json
+    ├── codex/
+    │   ├── AGENTS.md
+    │   └── config.toml
     └── ...
 ```
 
@@ -165,6 +173,7 @@ project/
 | Claude Code | `~/.claude/CLAUDE.md` | `~/.claude.json` | `~/.claude/skills/` |
 | Codex | `~/.codex/AGENTS.md` | `~/.codex/config.toml` | `~/.codex/skills/` |
 | Windsurf | `~/.codeium/windsurf/memories/global_rules.md` | N/A | N/A |
+| Pi | `~/.pi/agent/AGENTS.md` | `~/.pi/agent/mcp.json` | `~/.pi/agent/skills/` |
 
 ---
 
