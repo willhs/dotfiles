@@ -71,3 +71,5 @@
 	required = true
 [http]
 	postBuffer = 524288000
+[safe]
+	directory = /Users/will/workspaces/oe-cities-fetch-cache-melbourne-listings-92244a/travel-lab
