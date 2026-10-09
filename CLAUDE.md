@@ -1,1 +1,0 @@
-/Users/will/projects/dotfiles/.gent/rules.md
