@@ -76,10 +76,23 @@ apply_defaults() {
   "${DEFAULTS_SCRIPT}"
 }
 
+install_key_remap() {
+  local src="${DOTFILES_ROOT}/macos/com.user.key-remap.plist"
+  local dest="${HOME}/Library/LaunchAgents/com.user.key-remap.plist"
+  local domain="gui/$(id -u)"
+
+  log "Installing key remap launch agent"
+  mkdir -p "${HOME}/Library/LaunchAgents"
+  launchctl bootout "${domain}/com.user.key-remap" 2>/dev/null || true
+  cp "${src}" "${dest}"
+  launchctl bootstrap "${domain}" "${dest}"
+}
+
 ensure_homebrew
 brew_bundle
 post_brew_setup
 run_software_update
 apply_defaults
+install_key_remap
 
 log "macOS provisioning complete"
