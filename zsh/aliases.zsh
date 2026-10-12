@@ -12,7 +12,8 @@ alias c=claude
 
 # eza (better `ls`)
 # ------------------------------------------------------------------------------
-if type eza &>/dev/null; then
+# Skipped in agent shells ($CLAUDECODE): icon glyphs corrupt piped `ls` output.
+if type eza &>/dev/null && [[ -z $CLAUDECODE ]]; then
   alias l="eza --icons=always"
   alias ls="eza --icons=always"
   alias ll="eza -lg --icons=always"
